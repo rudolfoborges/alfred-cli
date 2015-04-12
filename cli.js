@@ -1,21 +1,27 @@
 #!/usr/bin/env node
-'use strict';
+(function(){
+	'use strict';
 
-var program = require('commander');
+	var CommandBuilder = require('./bin/command.builder'),
+		program = require('commander');
 
-program
-    .version('0.0.1')
-    .usage('[command]')
-    .option('init', 'Create a new alfred project')
-    .parse(process.argv);
+	var commandBuilder = new CommandBuilder();
 
-console.log(program);
+	program
+	    .version('0.0.1')
+	    .usage('[command]')
+	    .option('init [gitUrl]', 'Create a new alfred project. [gitUrl] Optional git repository url.');
 
+	
+	program.on('-h, --help', function(){
+		program.help();    
+	});
+	    
+	program.on('init', function(){
+		commandBuilder.build('init').execute(program.init);
+	});
 
-if(program.help){
-    program.help();    
-}
+	program.parse(process.argv);
 
-if(program.init){
-    console.log('Did create a new project');
-}
+})();
+
