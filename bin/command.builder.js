@@ -1,16 +1,13 @@
-(function(){
-	'use strict';
+'use strict';
 
-	var CommnadInit = require('./command.init');
+var CommnadInit = require('./command.init');
 
-	module.exports = function(){
-		return {
-			build: function(cmd){
-				if(cmd === 'init') return CommnadInit();
-			}
+module.exports = function(){
+	return {
+		build: function(cmd){
+			if(cmd === 'init') return CommnadInit();
 		}
 	}
-
-})();
+}
 
 
