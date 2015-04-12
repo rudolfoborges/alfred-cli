@@ -10,7 +10,7 @@
 	program
 	    .version('0.0.1')
 	    .usage('[command]')
-	    .option('init [gitUrl]', 'Create a new alfred project. [gitUrl] Optional git repository url.');
+	    .option('init [gitUrl]', 'Create a new Alfred Project. [gitUrl] Optional git repository url.');
 
 	
 	program.on('-h, --help', function(){
