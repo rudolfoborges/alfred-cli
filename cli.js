@@ -2,7 +2,8 @@
 'use strict';
 
 var CommandBuilder = require('./bin/command.builder'),
-	program = require('commander');
+	program = require('commander'),
+	inquirer = require("inquirer"); 
 
 var commandBuilder = new CommandBuilder();
 
@@ -11,13 +12,20 @@ program
     .usage('[command]')
     .option('init [gitUrl]', 'Create a new Alfred Project. [gitUrl] Optional git repository url.');
 
-
 program.on('-h, --help', function(){
 	program.help();    
 });
     
 program.on('init', function(){
-	commandBuilder.build('init').execute(program.init);
+	var question = {
+				    type: "list",
+				    name: "appType",
+				    message: "What kind your application?",
+				    choices: [ "Java", "Ruby", "Node", ".Net"],
+				  }
+	inquirer.prompt([question], function(answers){
+		commandBuilder.build('init').execute(program.init, answers);
+	});
 });
 
 program.parse(process.argv);

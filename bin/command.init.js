@@ -1,13 +1,37 @@
 'use strict';
-var git = require('gift'); 
+var git = require('gift'),
+	fs = require('fs'),
+	path = require('path'),
+	alfredConfig = require('../templates/alfred.json');
 
 module.exports = function(){
+
+	function init(){
+		var baseDir = path.join(process.cwd(), 'alfred');
+		createFolder(baseDir);
+		writeConfigFiles(baseDir);
+		console.log('Init config has been successfully!');
+	}
+
+	function writeConfigFiles(baseDir){
+		fs.writeFile(path.join(baseDir, 'alfred.json'), JSON.stringify(alfredConfig, null, '\t'), function(err){
+			if(err) console.log(err);
+		});
+	}
+
+	function createFolder(baseDir){
+		fs.mkdirSync(baseDir);
+		fs.mkdirSync(path.join(baseDir, 'models'));
+		fs.mkdirSync(path.join(baseDir, 'templates'));
+	}
+
+
 	return {
-		execute: function(arg){
-			console.log('Clone Alfred configurartion repository. Git is required.');
-			git.clone(arg === true ? 'git@github.com:rudolfoborges/afred.git' : arg, './alfred', function(err, repo){
-				if(err) console.log(err);
-				else console.log('Init config has been successfully!');
+		execute: function(arg, answers){
+			alfredConfig.appType = answers.appType;
+			fs.exists(path.join(process.cwd(), 'alfred'), function(exists){
+				if(!exists) init();
+				else console.log('Alfred folder already exists');
 			});
 		}	
 	};
