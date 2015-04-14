@@ -22,13 +22,14 @@ module.exports = function(){
 	function createFolder(baseDir){
 		fs.mkdirSync(baseDir);
 		fs.mkdirSync(path.join(baseDir, 'models'));
-		fs.mkdirSync(path.join(baseDir, 'templates'));
+		fs.mkdirSync(path.join(baseDir, 'models-templates'));
+		fs.mkdirSync(path.join(baseDir, 'app-templates'));
 	}
 
 
 	return {
 		execute: function(arg, answers){
-			alfredConfig.appType = answers.appType;
+			alfredConfig.platform = answers.platform;
 			fs.exists(path.join(process.cwd(), 'alfred'), function(exists){
 				if(!exists) init();
 				else console.log('Alfred folder already exists');
