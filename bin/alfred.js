@@ -1,5 +1,6 @@
 'use strict';
-var path = require('path');
+var path = require('path'),
+	fs = require('fs');
 	
 
 function alfred(){

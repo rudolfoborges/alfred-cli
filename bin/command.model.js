@@ -8,7 +8,7 @@ var git = require('gift'),
 
 module.exports = function(){
 
-	var modelDir = path.join(config.getBaseDir(), 'models');
+	var modelDir = path.join(alfred.getBaseDir(), 'models');
 
 	function add(name){
 		modelTemplate.createdAt = Date.now();
@@ -31,8 +31,8 @@ module.exports = function(){
 
 	return {
 		execute: function(name, arg){
-			if(arg === 'add') config.checkAlfredConfig(function(){add(name);});
-			else if(arg === 'remove') config.checkAlfredConfig(function(){emove(name);});
+			if(arg === 'add') alfred.checkAlfredConfig(function(){add(name);});
+			else if(arg === 'remove') alfred.checkAlfredConfig(function(){emove(name);});
 		}
 	}
 
