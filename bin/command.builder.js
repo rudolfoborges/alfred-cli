@@ -10,7 +10,7 @@ module.exports = function(){
 			if(cmd === 'init') return new CommandInit();
 			else if(cmd === 'model') return new CommandModel();
 			else if(cmd === 'template') return new CommandTemplate();
-
+			else if(cmd === 'generate') return new CommandTemplate();
 		}
 	}
 }
