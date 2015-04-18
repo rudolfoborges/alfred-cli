@@ -14,7 +14,7 @@ program
     .option('model <option> <name>', 'Add or remove a model. \n\t\t\t\t\t -> [add] Add a new model \n\t\t\t\t\t -> [rm] Remove a model')
     //.option('model-template <option> <name>', 'Add or remove a model template. \n\t\t\t\t\t -> [add] Add a new model template. \n\t\t\t\t\t -> [rm] Remove a model template')
     .option('app-template <option> <name>', 'Add or remove an application template. \n\t\t\t\t\t -> [add] Add a new application template. \n\t\t\t\t\t -> [rm] Remove an application template')
-    .option('generate <model>', 'Generate model')
+    .option('generate <model> <task>', 'Generate model')
 
 program.on('-h, --help', function(){
 	program.help();    
@@ -36,6 +36,12 @@ program.on('model', function(){
 	var name = program.rawArgs[program.rawArgs.length - 1];
 	var arg = program.rawArgs[program.rawArgs.length - 2];
 	commandBuilder.build('model').execute(name, arg);
+});
+
+program.on('template', function(){
+	var name = program.rawArgs[program.rawArgs.length - 1];
+	var arg = program.rawArgs[program.rawArgs.length - 2];
+	commandBuilder.build('template').execute(name, arg);
 });
 
 program.parse(process.argv);
